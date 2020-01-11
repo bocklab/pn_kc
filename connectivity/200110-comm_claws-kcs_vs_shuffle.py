@@ -2,7 +2,7 @@
 # copy from /Users/zhengz11/myscripts/bocklab_git/bocklab/zhihao/mushroom_py/v10/191117-comm_claws-kcs_vs_shuffle.py
 
 # 200110 change date in name to 200110
-# this will generate Fig 2A (and more?)
+# this will generate Fig 2A and Fig 2E (community input frequency between observed and claw-based null model)
 
 save_path = '/Users/zhengz11/myscripts/data_results/191117-community_expansion/'
 ana = ana_all_rd
