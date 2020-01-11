@@ -1,4 +1,6 @@
 
+# todo: need to add process_caron_data_v2
+
 # 200110 copy from /Users/zhengz11/myscripts/bocklab_git/bocklab/zhihao/mushroom_py/v10/191202-process_caron_data.py
 # this generates Suppl Fig4 A-D (re-analysis of Caron et al. result)
 # change date to 200110
