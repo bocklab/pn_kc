@@ -3,6 +3,9 @@
 
 # 200110 change date in name to 200110
 # this will generate Fig 2A and Fig 2E (community input frequency between observed and claw-based null model)
+# this will generate Fig 2B,C
+# 191117-num_claws_for_comm_vs_noncomm_allKCs.png
+# 191117-num_kcs_for_comm_vs_noncomm_allKCs.png
 
 save_path = '/Users/zhengz11/myscripts/data_results/191117-community_expansion/'
 ana = ana_all_rd
@@ -42,7 +45,7 @@ fig, ax1 = plt.subplots()
 clawhist = ax1.hist(sfl_claw_set)
 ax1.plot(ob_claw, 4, 'ro', ms=12)
 fig.set_size_inches([10,6])
-# plt.savefig(save_path + '191117-num_claws_for_comm_vs_noncomm_allKCs.png')
+plt.savefig(save_path + '191117-num_claws_for_comm_vs_noncomm_allKCs.png')
 # mean - 1412.5
 # std - 34.0
 # observed - 1901
@@ -53,7 +56,7 @@ fig = plt.figure()
 plt.hist(sfl_kc_set)
 plt.plot(ob_kc, 4, 'ro', ms=12)
 fig.set_size_inches([10,6])
-# plt.savefig(save_path + '191117-num_kcs_for_comm_vs_noncomm_allKCs.png')
+plt.savefig(save_path + '191117-num_kcs_for_comm_vs_noncomm_allKCs.png')
 # mean - 903.4
 # std - 17.3
 # observed - 844
