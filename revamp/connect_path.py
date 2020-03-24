@@ -5,6 +5,7 @@ import json
 import sys
 from operator import and_
 from functools import reduce
+import os
 
 # use your CATMAID fafb Token
 # %run /Users/zhengz11/myscripts/mushroom_v9/credential/fafb_tokens.py
@@ -91,12 +92,14 @@ def save_compact_sk(connection, skid, path):
                                                         skid))
     r = connection.get()
     path = path + "compact_sk/"
-    with open(path + "%s" % skid, 'w') as outfile:
+    if not os.path.exists(path):
+        os.makedirs(path)
+    with open(path + "%s" % skid, 'w+') as outfile:
         json.dump(json.loads(r.text), outfile)
 
 def load_compact_sk(skid, path):
     path = path + "compact_sk/"
-    with open(path + "%s" % skid, 'w') as outfile:
+    with open(path + "%s.json" % skid, 'w') as outfile:
         r = json.load(outfile)
     return r
 
@@ -129,7 +132,7 @@ def get_neurons_names(connection, sk_ids):
 
 def save_neurons_names(connection, sk_ids, path):
     path = path + "neurons_names"
-    r = dict(zip(skids, [get_neuron_name(connection, i) for i in sk_ids]))
+    r = dict(zip(sk_ids, [get_neuron_name(connection, i) for i in sk_ids]))
     with open(path, 'w+') as outfile:
             json.dump(r, outfile)
 
@@ -196,7 +199,7 @@ def get_annotation_ids(connection, query):
                 id_list.append(annotation['id'])
     return id_list
 
-def save_annotated_annotations(connection, meta_anno, returns='name', path):
+def save_annotated_annotations(connection, meta_anno, returns, path):
     response = get_annotation_ids(connection, [meta_anno])
     connection.addpath('/%s/annotations/query-targets' % connection.projectID)
     opts = {'project_id': 1, 'annotated_with[0]': response[0]}
@@ -228,12 +231,15 @@ def retrieve_annotations_for_skeleton(connection, skid):
         return results['annotations']
 
 def save_annotations_for_skeleton(connection, skids, path):
+    path = path + "annotations_for_skeleton/"
+    if not os.path.exists(path):
+        os.makedirs(path)
     for skid in skids:
         connection.addpath('/%s/annotations/forskeletons' % connection.projectID)
         opts = {'skeleton_ids[0]': skid}
         r = connection.post(opts)
         results = json.loads(r.text)
-        with open(path + "annotations_for_skeleton/%s" % skid, "w+") as file:
+        with open(path + "%s" % skid, "w+") as file:
             json.dump(results['annotations'], file)
             print("%s saved" % skid)
 
@@ -269,17 +275,19 @@ def get_pre_post_info(connection, pre_skids, post_skids, info_file="_"):
         # 11 "post_node_xyz"
         return data
 
-def save_pre_post_info(connection, c_skids, r_skids, info_file):
+def save_pre_post_info(connection, pre_skids, post_skids, path, info_file):
     # info_file is one of "RandomDraw", "t1p", or "all"
     connection.addpath('/%s/connector/info' % connection.projectID)
 
     opts = {'pre[%s]' % i: pre_skids[i] for i in range(len(pre_skids))}
     opts.update({'post[%s]' % i: post_skids[i]
                          for i in range(len(post_skids))})
-
+    path = path + "pre_post_info/"
+    if not os.path.exists(path):
+        os.makedirs(path)
     r = connection.post(opts)
     data = json.loads(r.text)
-    with open(connection + "pre_post_info/" + info_file, "w+") as file:
+    with open(path + info_file, "w+") as file:
         json.dump(data, file)
 
 
