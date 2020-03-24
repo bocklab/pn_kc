@@ -1,7 +1,38 @@
 
-from revamp import connect_path as ct
+# start a connection to fafb_c to download data
+import sys
+sys.path.append('/Users/zhengz11/myscripts/git_clone/pn_kc/')
+# import mushroom_2to3.connect as cc
+
+# credential, to delete when push to remote
+sys.path.append('/Users/zhengz11/myscripts/mushroom_v9/credential/')
+from fafb_tokens import token
+fafb_c = cc.fafb_connection(token)
+
+import mushroom_2to3.connect_path as cp
+import json
 
 path = "/Users/zhengz11/myscripts/git_clone/pn_kc/test/"
+
+def save_json(js, file_name):
+    with open(file_name, 'w+') as file:
+        json.dump(js, file)
+    file.close()
+
+def load_json(path):
+    with open(path) as outfile:
+        r = json.load(outfile)
+    return r
+
+# save_json(pn_skids, save_path + "PN")
+# save_json(rd, save_path + "RandomDraw")
+# save_json(t1p, save_path + "t1p")
+# save_json(bundle, save_path + "bundle")
+
+save_path = "/Users/zhengz11/myscripts/git_clone/pn_kc/data/skids/"
+pn_skids = load_json(save_path + "pn")
+rd = load_json(save_path + "RandomDraw")
+
 
 t_pn_skids = pn_skids
 t_kc_skids = rd[:30]
@@ -10,28 +41,33 @@ t_skids = t_pn_skids + t_kc_skids
 
 
 for i in t_skids:
-    save_compact_sk(fafb_c, i, path)
-    save_annotations_for_skeleton(fafb_c, skids, path)
+    cp.save_compact_sk(fafb_c, i, path)
+
+cp.save_annotations_for_skeleton(fafb_c, t_skids, path)
+cp.save_neurons_names(fafb_c, t_skids, path)
+cp.save_root_node(fafb_c, t_skids, path)
+cp.save_annotated_annotations(fafb_c, 'glom_class', 'id', path)
+cp.save_annotated_annotations(fafb_c, 'kc_class', 'id', path)
+cp.save_pre_post_info(fafb_c, t_pn_skids, t_kc_skids, path, 'testing')
 
 
-save_neurons_names(fafb_c, t_skids, path)
+# testing
 
-save_root_node(fafb_c, t_skids, path)
+def load_json(path):
+    with open(path) as outfile:
+        r = json.load(outfile)
+    return r
 
-save_annotated_annotations(fafb_c, 'glom_class', 'id', path)
-
-save_annotated_annotations(fafb_c, 'kc_class', 'id', path)
-
-save_pre_post_info(fafb_c, t_pn_skids, t_kc_skids, 'testing')
-
-
-
-# run it for
-'glom_class'
-'kc_class'
-save_annotated_annotations
+ana_t = ar.Analysis.init_connectivity(path, t_pn_skids, t_kc_skids, 'testing')
 
 
 
-# need to call for specific pairing of pre_skids, and post_skids
-save_pre_post_info(connection, pre_skids, post_skids):
+
+
+
+
+# test the get function with local paths
+import mushroom_2to3.connect_path as cp
+import mushroom_2to3.analysis_routine as ar
+path = "/Users/zhengz11/myscripts/git_clone/pn_kc/test/"
+t1 = cp.get_root_node(path, t_pn_skids[0])

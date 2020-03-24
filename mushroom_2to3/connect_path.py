@@ -57,7 +57,7 @@ def get_compact_sk(connection, skid, save_pickle=False):
     # 7: confidence
     if isinstance(connection, str):
         connection = connection + "compact_sk/"
-        with open(connection + "%s" % skid, 'w') as outfile:
+        with open(connection + "%s" % skid) as outfile:
             sk = json.load(outfile)
         return sk
     else:
@@ -99,7 +99,7 @@ def save_compact_sk(connection, skid, path):
 
 def load_compact_sk(skid, path):
     path = path + "compact_sk/"
-    with open(path + "%s.json" % skid, 'w') as outfile:
+    with open(path + "%s.json" % skid) as outfile:
         r = json.load(outfile)
     return r
 
@@ -109,9 +109,10 @@ def load_compact_sk(skid, path):
 def skid_to_name(connection, skids):
     if isinstance(connection, str):
         connection = connection + "neurons_names"
-        with open(connection, 'w+') as outfile:
+        with open(connection) as outfile:
                 r = json.load(outfile)
-        return [r[i] for i in skids]
+        t = [str(j) for j in skids]
+        return [r[i] for i in t]
     else:
         name_list = [get_neuron_name(connection, x) for x in skids]
         return name_list
@@ -146,7 +147,7 @@ def get_root_node(connection, skid):
         connection = connection + "root_node"
         with open(connection) as outfile:
             r = json.load(outfile)
-        return r[skid]
+        return r[str(skid)]
     else:
         connection.addpath('/%s/skeletons/%s/root' % (connection.projectID, skid))
         r = connection.get()
@@ -156,10 +157,10 @@ def get_root_node(connection, skid):
 def save_root_node(connection, skids, path):
     path = path + "root_node"
     f = {}
-    for i in skids:
+    for skid in skids:
         connection.addpath('/%s/skeletons/%s/root' % (connection.projectID, skid))
         r = connection.get()
-        f[i] = json.loads(r.text)
+        f[skid] = json.loads(r.text)
     with open(path, 'w+') as outfile:
         json.dump(f, outfile)
     print("root nodes saved")
@@ -289,6 +290,7 @@ def save_pre_post_info(connection, pre_skids, post_skids, path, info_file):
     data = json.loads(r.text)
     with open(path + info_file, "w+") as file:
         json.dump(data, file)
+    print(info_file + " saved")
 
 
 

@@ -33,12 +33,27 @@ def save_json(js, file_name):
         json.dump(js, file)
     file.close()
 
-save_json(rd, save_path + "RandomDraw.txt")
-save_json(t1p, save_path + "t1p.txt")
-save_json(bundle, save_path + "bundle.txt")
+def load_json(path):
+    with open(path) as outfile:
+        r = json.load(outfile)
+    return r
+
+# save_json(pn_skids, save_path + "PN")
+# save_json(rd, save_path + "RandomDraw")
+# save_json(t1p, save_path + "t1p")
+# save_json(bundle, save_path + "bundle")
 
 
 
+save_path = "/Users/zhengz11/myscripts/git_clone/pn_kc/data/skids/"
+pn_skids = load_json(save_path + "pn")
+rd = load_json(save_path + "RandomDraw")
+# load_json(save_path + "t1p.txt")
+# load_json(save_path + "bundle.txt")
+t_pn_skids = pn_skids
+t_kc_skids = rd[:30]
+
+t_skids = t_pn_skids + t_kc_skids
 
 
 

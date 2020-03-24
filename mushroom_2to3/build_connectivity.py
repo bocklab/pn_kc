@@ -9,7 +9,7 @@ from sklearn.neighbors import NearestNeighbors
 from scipy.spatial import ConvexHull
 from sqlalchemy import create_engine
 
-from . import connect as cc
+from . import connect_path as cc
 from . import neurogenesis
 
 
@@ -457,7 +457,7 @@ def get_connectivity_data(connection, col_neurons, row_neurons, c_skids, r_skids
     for i in r:
         pn_kc_conn[r_skids.index(i[8]), c_skids.index(i[3])] += 1
     conn_data['pn_kc'] = ConnectivityMatrix('pn_kc', pn_kc_conn, c_skids, r_skids)
-
+    return conn_data
 """
     # 020323 suppress here as KC -> PN connectivity is not relevant to the paper
 
@@ -477,7 +477,6 @@ def get_connectivity_data(connection, col_neurons, row_neurons, c_skids, r_skids
     conn_data['kc_bouton'] = ConnectivityMatrix('kc_bouton', kc_btn, btn_ids, r_skids)
 """
 
-    return conn_data
 
 
 def get_ci_matrix(conn, ci_source=False):
