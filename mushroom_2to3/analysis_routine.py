@@ -23,7 +23,8 @@ class Analysis(object):
         self.geo_data = {}
 
     @classmethod
-    def init_connectivity(cls, connection, c_skids, r_skids):
+    def init_connectivity(cls, connection, c_skids, r_skids, kc_group):
+        # if connection is a path, kc_group can only be "RandomDraw", "t1p", or "all"
         c=cls()
 
         c.col_neurons = neurogenesis.init_from_skid_list(connection, c_skids)
@@ -33,7 +34,7 @@ class Analysis(object):
         claw_ids = neurons_to_segment_ids(r_skids, c.row_neurons)
 
         c.conn_data = get_connectivity_data(connection, c.col_neurons, c.row_neurons,
-                                            c_skids, r_skids, btn_ids, claw_ids)
+                                            c_skids, r_skids, btn_ids, claw_ids, kc_group)
 
         c.geo_data['centroids'] = GeoMatrix('segment_centroids', centroid_matrix_constructor,
                                             btn_ids, claw_ids, c.col_neurons, c.row_neurons, 'segments')
