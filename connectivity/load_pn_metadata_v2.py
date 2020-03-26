@@ -1,12 +1,14 @@
 
 import pandas as pd
 
-glom_id_table = pd.read_excel("/Users/zhengz11/myscripts/data_results/171012-1D_olfactory_space/171012-glom_index_list.xlsx")
+# glom_id_table = pd.read_excel("/Users/zhengz11/myscripts/data_results/171012-1D_olfactory_space/171012-glom_index_list.xlsx")
+glom_id_table = pd.read_excel(local_path + "data/171012-glom_index_list.xlsx")
 
-glom_btn_table = pd.read_excel("/Users/zhengz11/myscripts/data_results/180223-resuscitate_pn-kc_network/180320-glom_name_id.xlsx")
-# glom_btn_table = pd.read_excel("data/180320-glom_name_id.xlsx")
+# glom_btn_table = pd.read_excel("/Users/zhengz11/myscripts/data_results/180223-resuscitate_pn-kc_network/180320-glom_name_id.xlsx")
+glom_btn_table = pd.read_excel(local_path + "data/180320-glom_name_id.xlsx")
 
-pn_meta_table = pd.read_excel('/Users/zhengz11/myscripts/data_results/180223-resuscitate_pn-kc_network/191029-processed_pn_metadata.xlsx')
+# pn_meta_table = pd.read_excel('/Users/zhengz11/myscripts/data_results/180223-resuscitate_pn-kc_network/191029-processed_pn_metadata.xlsx')
+pn_meta_table = pd.read_excel(local_path + "data/191029-processed_pn_metadata.xlsx")
 
 original_order = [53,10,43,37,36,35,33,31,52,25,
 20,15,26,3,6,9,30,22,23,34,
