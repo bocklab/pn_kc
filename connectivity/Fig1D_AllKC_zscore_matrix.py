@@ -1,4 +1,4 @@
-# Figre 1D, z-score matrix with PNs and all KCs (random draw and t1p), random bouton null model
+# Figre 1D (200326, PNKC2019_v9_fig_200313DB-ZZfixedSuppl6B.pptx), z-score matrix with PNs and all KCs (random draw and t1p), random bouton null model
 
 import pandas as pd
 import numpy as np

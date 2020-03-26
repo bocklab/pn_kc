@@ -1,7 +1,7 @@
 
 
 # 200109 copy from /Users/zhengz11/myscripts/bocklab_git/bocklab/zhihao/mushroom_py/v10/191211-update_claw_distribution.py
-# 200109 this will generate supplementary figure 2 (claw distribution)
+# 200109 this will generate supplementary figure 2 (claw distribution), 200326, PNKC2019_v9_fig_200313DB-ZZfixedSuppl6B.pptx
 
 import pandas as pd
 import numpy as np
