@@ -1,13 +1,15 @@
 
 # start a connection to fafb_c to download data
 import sys
+import mushroom_2to3.connect_path as cp
+import mushroom_2to3.analysis_routine as ar
 sys.path.append('/Users/zhengz11/myscripts/git_clone/pn_kc/')
 # import mushroom_2to3.connect as cc
 
 # credential, to delete when push to remote
 sys.path.append('/Users/zhengz11/myscripts/mushroom_v9/credential/')
 from fafb_tokens import token
-fafb_c = cc.fafb_connection(token)
+fafb_c = cp.fafb_connection(token)
 
 import mushroom_2to3.connect_path as cp
 import json

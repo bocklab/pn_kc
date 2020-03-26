@@ -1,13 +1,32 @@
-
 import sys
+import os
 sys.path.append('/Users/zhengz11/myscripts/git_clone/pn_kc/')
-import mushroom_2to3.connect as cc
+
+import json
+import mushroom_2to3.connect_path as cp
+import mushroom_2to3.analysis_routine as ar
+
 
 # credential, to delete when push to remote
 sys.path.append('/Users/zhengz11/myscripts/mushroom_v9/credential/')
 from fafb_tokens import token
-fafb_c = cc.fafb_connection(token)
+fafb_c = cp.fafb_connection(token)
 
+
+def save_json(js, file_name):
+    with open(file_name, 'w+') as file:
+        json.dump(js, file)
+    file.close()
+
+def load_json(path):
+    with open(path) as outfile:
+        r = json.load(outfile)
+    return r
+
+path = "/Users/zhengz11/myscripts/git_clone/pn_kc/test/"
+
+##----------------------------------------
+import mushroom_2to3.connect as cc
 pn_skids = cc.get_skids_from_annos(
     fafb_c, [['right_calyx_PN'], ['has_bouton']], ["multiglomerular PN"])
 
@@ -24,56 +43,35 @@ t1p = cc.get_skids_from_annos(fafb_c,
 bundle = cc.get_skids_from_annos(fafb_c,
     [['Bundle 1 Seed', 'Different Tracing Protocol in Bundle 1'], ['Complete']], ['KCaBp', 'KCyd'])
 
+save_path = path + "skids/"
 
-import json
-save_path = "/Users/zhengz11/myscripts/git_clone/pn_kc/data/skids/"
+if not os.path.exists(save_path):
+    os.makedirs(save_path)
 
-def save_json(js, file_name):
-    with open(file_name, 'w+') as file:
-        json.dump(js, file)
-    file.close()
-
-def load_json(path):
-    with open(path) as outfile:
-        r = json.load(outfile)
-    return r
-
-# save_json(pn_skids, save_path + "PN")
-# save_json(rd, save_path + "RandomDraw")
-# save_json(t1p, save_path + "t1p")
-# save_json(bundle, save_path + "bundle")
+save_json(pn_skids, save_path + "PN")
+save_json(rd, save_path + "RandomDraw")
+save_json(t1p, save_path + "t1p")
+save_json(bundle, save_path + "bundle")
 
 
-
-save_path = "/Users/zhengz11/myscripts/git_clone/pn_kc/data/skids/"
-pn_skids = load_json(save_path + "pn")
-rd = load_json(save_path + "RandomDraw")
+# pn_skids = load_json(save_path + "PN")
+# rd = load_json(save_path + "RandomDraw")
+# bundle = load_json(save_path + "bundle")
 # load_json(save_path + "t1p.txt")
 # load_json(save_path + "bundle.txt")
-t_pn_skids = pn_skids
-t_kc_skids = rd[:30]
 
-t_skids = t_pn_skids + t_kc_skids
+all_skids = pn_skids + rd + t1p + bundle
 
+for i in all_skids:
+    cp.save_compact_sk(fafb_c, i, path)
 
-
-
-
-
-
-
-path =
-
-for all skids
-save_compact_sk(connection, skid, path)
+cp.save_annotations_for_skeleton(fafb_c, all_skids, path)
+cp.save_neurons_names(fafb_c, all_skids, path)
+cp.save_root_node(fafb_c, all_skids, path)
+cp.save_annotated_annotations(fafb_c, 'glom_class', 'id', path)
+cp.save_annotated_annotations(fafb_c, 'kc_class', 'id', path)
+cp.save_pre_post_info(fafb_c, pn_skids, rd + t1p, path, 'pn_all_kc')
 
 
-# run it for
-'glom_class'
-'kc_class'
-save_annotated_annotations
-
-
-
-# need to call for specific pairing of pre_skids, and post_skids
-save_pre_post_info(connection, pre_skids, post_skids):
+## testing analysis
+ana_all_rd = ar.Analysis.init_connectivity(path, pn_skids, rd + t1p, 'pn_all_kc')
