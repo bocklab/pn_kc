@@ -156,3 +156,52 @@ ax1.set_aspect("equal")
 fig.set_size_inches(16,12)
 plt.show()
 # fig.savefig(save_path + "191128-allKCs_CondInputMatrix_LabelColored_NullModel.png", bbox_inches='tight')
+
+
+
+# SFig6B (200326, PNKC2019_v9_fig_200313DB-ZZfixedSuppl6B.pptx)
+# copied from 200206-main_matrices_zscore_distribution.py
+# (1) The following is copied from above
+ana = ana_all_rd
+conn_data = ana.conn_data['glom_kc_in_claw_unit']
+ob_conn, glom_prob, glom_idx_ids = get_conn_prob_idx(conn_data)
+num_exp = 1000
+stat = [get_raw_inputs(shuffle_glom_kc_w_prob(ob_conn, glom_prob)) for i in range(num_exp)]
+stat = np.array(stat)
+sd = np.nanstd(stat, axis=0)
+avg = np.nanmean(stat, axis=0)
+ob_ci = get_raw_inputs(ob_conn)
+comm_zscore = np.divide(np.subtract(ob_ci, avg), sd)
+cm_zs = PairMatrix('', comm_zscore, glom_idx_ids)
+zs_t1 = cm_zs.conn.flatten().copy()
+
+#(2) The following is basically copied from Fig2D_SFig6A_ob_vs_RandomClawModel.py
+ana = ana_all_rd
+conn_data = ana.conn_data['glom_kc_in_claw_unit']
+ob_conn, glom_prob, glom_idx_ids = get_conn_prob_idx(conn_data)
+stat = [get_raw_inputs(i) for i in shuffle_glom_kc_iterate(ob_conn, 1000)]
+stat = np.array(stat)
+sd = np.nanstd(stat, axis=0)
+avg = np.nanmean(stat, axis=0)
+ob_ci = get_raw_inputs(ob_conn)
+comm_zscore = np.divide(np.subtract(ob_ci, avg), sd)
+# clustering
+claw_cm_zs = PairMatrix('', comm_zscore, glom_idx_ids)
+zs_t2 = claw_cm_zs.conn.flatten().copy()
+
+# save_path = "/Users/zhengz11/myscripts/data_results/200206-zscore_distribution/200314-zscore_compilation/"
+
+fig, ax = plt.subplots()
+bin_set = np.arange(-5,16,0.5)
+xtick_labels = np.arange(-5,16,1)
+ax.hist([zs_t1, zs_t2], bins=bin_set, label=['observed vs. random bouton', 'observed vs. random claw'])
+ax.legend(loc='upper right')
+ax.set_xticks(xtick_labels)
+ax.set_xlabel('Z scores')
+fig.set_size_inches(12,8)
+# fig.savefig(save_path + '200314-zscore_hist_ObvsRandBtn_ObvsRandClaw.png', bbox_inches='tight')
+
+# Ob vs. random bouton, mean -0.044, std 2.11
+# Ob vs. random claw, mean -0.058, std 1.47
+sc.stats.ks_2samp(zs_t1, zs_t2)
+# P < 1e-10
