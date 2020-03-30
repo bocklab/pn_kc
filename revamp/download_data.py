@@ -23,7 +23,7 @@ def load_json(path):
         r = json.load(outfile)
     return r
 
-path = "/Users/zhengz11/myscripts/git_clone/pn_kc/test/"
+path = "/Users/zhengz11/myscripts/git_clone/pn_kc/"
 
 ##----------------------------------------
 import mushroom_2to3.connect as cc
@@ -72,6 +72,10 @@ cp.save_annotated_annotations(fafb_c, 'glom_class', 'id', path)
 cp.save_annotated_annotations(fafb_c, 'kc_class', 'id', path)
 cp.save_pre_post_info(fafb_c, pn_skids, rd + t1p, path, 'pn_all_kc')
 
+# 200329
+cp.save_pre_post_info(fafb_c, pn_skids, rd + t1p, path, 'pn_rd_kc')
 
 ## testing analysis
 ana_all_rd = ar.Analysis.init_connectivity(path, pn_skids, rd + t1p, 'pn_all_kc')
+
+ana_rd = ar.Analysis.init_connectivity(path, pn_skids, rd + t1p, 'pn_rd_kc')

@@ -79,6 +79,7 @@ plt.show()
 
 
 
+# SFig6A
 ##------------------------------------------
 # a randomized connectivity (random claw model) against the null model (random claw model)
 

@@ -68,16 +68,19 @@ save_path = "/Users/zhengz11/myscripts/data_results/200206-zscore_distribution/"
 
 t1 = t1_zs.conn[:10,:10]
 t1_f = t1.flatten()
+# mean 5.7 std 2.9
 
 t2 = t1_zs.conn[:19,:19]
 t2_idx = np.ones(t2.shape)
 t2_idx[:10,:10] = 0
 t2_f = t2[np.where(t2_idx)]
+# mean ± std 2.3 ± 1.9
 
 t3 = t1_zs.conn.copy()
 t3_idx = np.ones(t3.shape)
 t3_idx[:19,:19] = 0
 t3_f = t3[np.where(t3_idx)]
+# mean ± std -0.5 ± 1.5
 
 bin_set = np.arange(-5,16)
 xtick_labels = np.arange(-5,16,2)
