@@ -1,5 +1,6 @@
 
 import pandas as pd
+import json
 
 # glom_id_table = pd.read_excel("/Users/zhengz11/myscripts/data_results/171012-1D_olfactory_space/171012-glom_index_list.xlsx")
 glom_id_table = pd.read_excel(local_path + "data/171012-glom_index_list.xlsx")
@@ -74,3 +75,13 @@ def get_conn_prob_idx(conn_obj, glom_data_table=glom_btn_table):
 
     conn = conn_obj.conn['1s']
     return conn, glom_prob, glom_idx_ids
+
+def save_json(js, file_name):
+    with open(file_name, 'w+') as file:
+        json.dump(js, file)
+    file.close()
+
+def load_json(path):
+    with open(path) as outfile:
+        r = json.load(outfile)
+    return r
