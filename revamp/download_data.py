@@ -43,7 +43,7 @@ t1p = cc.get_skids_from_annos(fafb_c,
 bundle = cc.get_skids_from_annos(fafb_c,
     [['Bundle 1 Seed', 'Different Tracing Protocol in Bundle 1'], ['Complete']], ['KCaBp', 'KCyd'])
 
-save_path = path + "skids/"
+save_path = path + "data/skids/"
 
 if not os.path.exists(save_path):
     os.makedirs(save_path)
@@ -53,6 +53,19 @@ save_json(rd, save_path + "RandomDraw")
 save_json(t1p, save_path + "t1p")
 save_json(bundle, save_path + "bundle")
 
+
+# download the different KC subtypes
+y = cc.get_skids_from_annos(fafb_c,[['KCy']])
+
+prime = cc.get_skids_from_annos(fafb_c,
+                             [["KCa'B'", "KCa'B'ap", "KCa'B'm", "KCa'B'x"]])
+
+ab = cc.get_skids_from_annos(fafb_c,
+                             [['KCaBc', 'KCaBs', 'KCaBx']])
+
+save_json(y, save_path + "kcy")
+save_json(prime, save_path + "kcprime")
+save_json(ab, save_path + "kcab")
 
 # pn_skids = load_json(save_path + "PN")
 # rd = load_json(save_path + "RandomDraw")

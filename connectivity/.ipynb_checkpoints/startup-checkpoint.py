@@ -1,6 +1,3 @@
-import sys
-import os
-sys.path.append('/Users/zhengz11/myscripts/git_clone/pn_kc/')
 
 # local path to the code
 local_path = "/Users/zhengz11/myscripts/git_clone/pn_kc/"

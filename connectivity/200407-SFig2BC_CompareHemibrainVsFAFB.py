@@ -61,22 +61,15 @@ r1 = ax.bar(ind + 0.2, p_tbl.fafb_perc_connections, width, color=sns.xkcd_palett
 
 r2 = ax.bar(ind + 0.6, p_tbl.glom_perc_conn, width, color=sns.xkcd_palette(['amber']), align='center')
 
-ax.legend((r1[0], r2[0]), ['FAFB (the current study)', 'Hemibrain (Xu et al. 2020)'], fontsize=12, loc='upper right')
+ax.legend((r1[0], r2[0]), ['FAFB (the current study)', 'Hemibrain (Xu et al. 2020)'], fontsize=20, loc='upper right')
 
 plt.xticks(ind + 0.4, p_tbl.glom)
 
-ticks = ax.get_xticklabels()
-for i,tick in enumerate(ticks):
-        tick.set_color(tbl.query("short_glom_name==@tick.get_text()").color.iloc[0])
-#        if tick.get_text() in comm_gloms:
-#            tick.set_weight("extra bold")
-
-
-ax.set_ylabel('% connections', fontsize=14)
-ax.tick_params(axis='both', which='major', labelsize=14)
+ax.set_ylabel('% connections', fontsize=20)
+ax.tick_params(axis='both', which='major', labelsize=15)
 plt.xlim(-0.2,50)
 fig.set_size_inches(40,10)
-# fig.savefig(hemi_path + "200331-compare_fafb_hemibrain_connections.png",dpi=600, bbox_inches='tight')
+# fig.savefig(save_path + "200408-compare_fafb_hemibrain_connections.png",dpi=600, bbox_inches='tight')
 
 
 # produce one with R2 and p value
@@ -125,4 +118,31 @@ ax.set_xlabel('FAFB (in the current study)')
 ax.set_ylabel('Hemibrain (Xu et al. 2020)')
 ax.set_title("Percentage of connections for each PN type")
 # fig.savefig(hemi_path + "200331-compare_fafb_hemibrain_connections_scatterplot_3syn_wCol.png",dpi=600, bbox_inches='tight')
+
+
+# a version of SFig2C (compare hemibrain and our data with the bars) PNKC2019_figs_v10_200407DB.pptx
+fig, ax = plt.subplots()
+ind = p_tbl.index
+width = 0.4
+
+r1 = ax.bar(ind + 0.2, p_tbl.fafb_perc_connections, width, color=sns.xkcd_palette(['windows blue']), align='center')
+
+r2 = ax.bar(ind + 0.6, p_tbl.glom_perc_conn, width, color=sns.xkcd_palette(['amber']), align='center')
+
+ax.legend((r1[0], r2[0]), ['FAFB (the current study)', 'Hemibrain (Xu et al. 2020)'], fontsize=12, loc='upper right')
+
+plt.xticks(ind + 0.4, p_tbl.glom)
+
+ticks = ax.get_xticklabels()
+for i,tick in enumerate(ticks):
+        tick.set_color(tbl.query("short_glom_name==@tick.get_text()").color.iloc[0])
+#        if tick.get_text() in comm_gloms:
+#            tick.set_weight("extra bold")
+
+
+ax.set_ylabel('% connections', fontsize=14)
+ax.tick_params(axis='both', which='major', labelsize=14)
+plt.xlim(-0.2,50)
+fig.set_size_inches(40,10)
+# fig.savefig(hemi_path + "200331-compare_fafb_hemibrain_connections.png",dpi=600, bbox_inches='tight')
 '''

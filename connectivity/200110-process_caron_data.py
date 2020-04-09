@@ -5,15 +5,16 @@
 # this generates Suppl Fig4 A-D (re-analysis of Caron et al. result)
 # change date to 200110
 
-save_path = "/Users/zhengz11/myscripts/data_results/191202-redo_caron_comparison/"
+# save_path = "/Users/zhengz11/myscripts/data_results/191202-redo_caron_comparison/"
 
 from process_caron_data_v2 import *
 
 num_exp = 1000
 
 # make all gloms use this universal ids
+# glom_id_table = pd.read_excel( "/Users/zhengz11/myscripts/data_results/171012-1D_olfactory_space/171012-glom_index_list.xlsx")
 glom_id_table = pd.read_excel(
-    "/Users/zhengz11/myscripts/data_results/171012-1D_olfactory_space/171012-glom_index_list.xlsx")
+    local_path + "data/171012-glom_index_list.xlsx")
 
 def get_zscores(conn, prob, num_exp=1000):
     stat = [get_raw_inputs(shuffle_glom_kc_w_prob(conn, prob)) for i in range(num_exp)]
@@ -108,10 +109,9 @@ for x in [ax1.get_xticklabels(), ax1.get_yticklabels()]:
 ax1.set_aspect("equal")
 fig.set_size_inches(16,12)
 plt.show()
-
-fname = '191204-Analyze_caron_conn_BtnNullModel'
-fig.savefig(save_path + fname + '.png', bbox_inches='tight')
-pd.DataFrame({'glom_seq_names': gloms, 'glom_seq_ids': t1.col_ids}).to_csv(save_path + fname + '_GlomSeq'+ '.csv')
+# fname = '191204-Analyze_caron_conn_BtnNullModel'
+# fig.savefig(save_path + fname + '.png', bbox_inches='tight')
+# pd.DataFrame({'glom_seq_names': gloms, 'glom_seq_ids': t1.col_ids}).to_csv(save_path + fname + '_GlomSeq'+ '.csv')
 
 
 ##-----------------------------------------------
@@ -159,8 +159,8 @@ fig.set_size_inches(16,12)
 plt.show()
 
 fname = '191204-Analyze_caron_conn_ClawNullModel'
-fig.savefig(save_path + fname + '.png', bbox_inches='tight')
-pd.DataFrame({'glom_seq_names': gloms, 'glom_seq_ids': t1.col_ids}).to_csv(save_path + fname + '_GlomSeq'+ '.csv')
+# fig.savefig(save_path + fname + '.png', bbox_inches='tight')
+# pd.DataFrame({'glom_seq_names': gloms, 'glom_seq_ids': t1.col_ids}).to_csv(save_path + fname + '_GlomSeq'+ '.csv')
 
 
 
@@ -183,13 +183,15 @@ t1 = ca_conn.sum(0)
 ca_tbl = ana_ca.suppl_tbl.copy()
 
 # in ana_all_rd, How many KCs have known subtypes? What are their subtypes?
-y = cc.get_skids_from_annos(fafb_c,[['KCy']])
+# y = cc.get_skids_from_annos(fafb_c,[['KCy']])
 
-prime = cc.get_skids_from_annos(fafb_c,
-                             [["KCa'B'", "KCa'B'ap", "KCa'B'm", "KCa'B'x"]])
+# prime = cc.get_skids_from_annos(fafb_c, [["KCa'B'", "KCa'B'ap", "KCa'B'm", "KCa'B'x"]])
 
-ab = cc.get_skids_from_annos(fafb_c,
-                             [['KCaBc', 'KCaBs', 'KCaBx']])
+# ab = cc.get_skids_from_annos(fafb_c, [['KCaBc', 'KCaBs', 'KCaBx']])
+
+y = load_json(local_path + "data/skids/kcy")
+prime = load_json(local_path + "data/skids/kcprime")
+ab = load_json(local_path + "data/skids/kcab")
 
 kcs = ana.conn_data['glom_kc_in_claw_unit'].row_ids
 conn_obj = ana.conn_data['glom_kc_in_claw_unit']
@@ -289,8 +291,8 @@ fig.set_size_inches(16,12)
 plt.show()
 
 fname = '191204-Analyze_subsampled_conn_BtnNullModel'
-fig.savefig(save_path + fname + '.png', bbox_inches='tight')
-pd.DataFrame({'glom_seq_names': gloms, 'glom_seq_ids': t1.col_ids}).to_csv(save_path + fname + '_GlomSeq'+ '.csv')
+# fig.savefig(save_path + fname + '.png', bbox_inches='tight')
+# pd.DataFrame({'glom_seq_names': gloms, 'glom_seq_ids': t1.col_ids}).to_csv(save_path + fname + '_GlomSeq'+ '.csv')
 
 
 
@@ -378,4 +380,4 @@ plt.xlim(-0.2,49)
 fig.set_size_inches(30,8)
 
 fname = '191204-caron_conn_sampling_tick'
-fig.savefig(save_path + fname + '.png', bbox_inches='tight')
+# fig.savefig(save_path + fname + '.png', bbox_inches='tight')
