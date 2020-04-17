@@ -1,4 +1,5 @@
 
+import matplotlib.pyplot as plt
 # todo: need to add process_caron_data_v2s
 
 # 200110 copy from /Users/zhengz11/myscripts/bocklab_git/bocklab/zhihao/mushroom_py/v10/191202-process_caron_data.py
@@ -6,8 +7,7 @@
 # change date to 200110
 
 # save_path = "/Users/zhengz11/myscripts/data_results/191202-redo_caron_comparison/"
-
-from process_caron_data_v2 import *
+exec(open(local_path + "/connectivity/process_caron_data_v2.py").read())
 
 num_exp = 1000
 
@@ -349,11 +349,11 @@ fig.set_size_inches(16,12)
 plt.show()
 
 fname = '191204-Analyze_subsampled_conn_ClawNullModel'
-fig.savefig(save_path + fname + '.png', bbox_inches='tight')
-pd.DataFrame({'glom_seq_names': gloms, 'glom_seq_ids': t1.col_ids}).to_csv(save_path + fname + '_GlomSeq'+ '.csv')
+# fig.savefig(save_path + fname + '.png', bbox_inches='tight')
+# pd.DataFrame({'glom_seq_names': gloms, 'glom_seq_ids': t1.col_ids}).to_csv(save_path + fname + '_GlomSeq'+ '.csv')
 
-pd.DataFrame(sbs_conn).to_csv(save_path + fname + 'sbs_conn.csv')
-pd.DataFrame(sbs_col_ids).to_csv(save_path + fname + 'sbs_conn_col_ids.csv')
+# pd.DataFrame(sbs_conn).to_csv(save_path + fname + 'sbs_conn.csv')
+# pd.DataFrame(sbs_col_ids).to_csv(save_path + fname + 'sbs_conn_col_ids.csv')
 
 
 
@@ -366,7 +366,7 @@ avg = np.nanmean(stat, axis=0)
 
 ca_ob = np.sum(ca_conn,0)
 
-glom_seq = pd.read_csv(save_path + '191204-Analyze_caron_conn_BtnNullModel_GlomSeq.csv').glom_seq_names.tolist()
+glom_seq = pd.read_csv(local_path + 'data/191204-Analyze_caron_conn_BtnNullModel_GlomSeq.csv').glom_seq_names.tolist()
 
 gloms = df_lookup('id', caron_col_ids[:-1], 'glom', glom_id_table)
 
