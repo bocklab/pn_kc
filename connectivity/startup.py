@@ -6,6 +6,9 @@ sys.path.append('/Users/zhengz11/myscripts/git_clone/pn_kc/')
 local_path = "/Users/zhengz11/myscripts/git_clone/pn_kc/"
 # data_path = local_path + "test/skids/"
 
+# exec(open(local_path + "/connectivity/startup.py").read())
+
+
 
 
 # import things in the mushroom module

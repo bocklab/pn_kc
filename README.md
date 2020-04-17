@@ -2,7 +2,7 @@
 
 Code for the PN-KC paper
 
-- [mushroom/mushroom_2to3](https://github.com/flyconnectome/mushroom/tree/master/mushroom_2to3) and [python-igraph](https://github.com/igraph/python-igraph) is required to run the code in *connectivity*
+- [python-igraph](https://github.com/igraph/python-igraph) is required to run the code in *connectivity*
 
 - Some code will require [pyMaid](https://github.com/schlegelp/pyMaid)
 

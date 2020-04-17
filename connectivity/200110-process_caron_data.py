@@ -116,9 +116,24 @@ plt.show()
 
 ##-----------------------------------------------
 # run Caron et al. connectivity with claw null models
+
+'''
+# This is for old way of using ratio rather than strictly maintaining in-degree and out-degree per KC and PN respectively.
 t1 = np.sum(ca_conn,0)
 ob_prob = t1/np.sum(t1)
 comm_zscore = get_zscores(ca_conn, ob_prob, num_exp=1000)
+'''
+
+def get_zscores_RandomClaw(conn, num_exp=1000):
+    stat = [get_raw_inputs(i) for i in shuffle_glom_kc_iterate(conn, num_exp)]
+    stat = np.array(stat)
+    sd = np.nanstd(stat, axis=0)
+    avg = np.nanmean(stat, axis=0)
+    ob_ci = get_raw_inputs(conn)
+    comm_zscore = np.divide(np.subtract(ob_ci, avg), sd)
+    return comm_zscore
+
+comm_zscore = get_zscores_RandomClaw(ca_conn, num_exp=1000)
 
 # remove the final extra column
 
