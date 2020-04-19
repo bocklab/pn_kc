@@ -92,3 +92,60 @@ cp.save_pre_post_info(fafb_c, pn_skids, rd + t1p, path, 'pn_rd_kc')
 ana_all_rd = ar.Analysis.init_connectivity(path, pn_skids, rd + t1p, 'pn_all_kc')
 
 ana_rd = ar.Analysis.init_connectivity(path, pn_skids, rd + t1p, 'pn_rd_kc')
+
+
+# save pickle python object for the code in PN bouton clustering
+
+import pandas as pd
+import numpy as np
+from pymaid import rmaid
+import matplotlib.pylab as pylab
+import matplotlib.pyplot as plt
+import pymaid
+import mushroom_2to3.neurogenesis as neurogenesis
+# %run startup_py3.py
+# %run load_pn_metadata_v1.py
+
+# pn_skids = cc.get_skids_from_annos(fafb_c, [['right_calyx_PN'], ['has_bouton']], ["multiglomerular PN"])
+
+pns_ms = neurogenesis.init_from_skid_list(fafb_c, pn_skids)
+
+import pickle
+path = local_path + "data/pn_bouton_clusters/"
+
+with open(path + "pns_ms.pkl", 'wb') as f:
+    pickle.dump(pns_ms, f, -1)
+    
+nl = [pymaid.get_neuron([str(i) for i in j]) for j in [pn_skids[:40], pn_skids[40:80], pn_skids[80:]]]
+pns_pm = nl[0] + nl[1] + nl [2]
+
+with open(path + "pns_pm.pkl", 'wb') as f:
+    pickle.dump(pns_pm, f, -1)
+
+ca = pymaid.get_volume('MB_CA_R')
+
+with open(path + "ca.pkl", 'wb') as f:
+    pickle.dump(ca, f, -1)
+
+df = pd.read_excel(local_path + 'data/180613-pn_subtypes.xlsx')
+
+
+# for loading the pickle pymaid neuronlist data
+path = local_path + "data/pn_bouton_clusters/"
+with open(path + "pns_pm.pkl", 'rb') as f:
+    pns_pm = pickle.load(f)
+
+    
+with open(path + "pns_ms.pkl", 'rb') as f:
+    pns_ms = pickle.load(f)
+    
+with open(path + "ca.pkl", 'rb') as f:
+    ca = pickle.load(f)
+    
+    
+# trying
+import pickle
+path = local_path + "data/pn_bouton_clusters/"
+for i in pns_pm:
+    with open(path + "pns_pm/" + "{}.pkl".format(i.skeleton_id), 'wb') as f:
+        pickle.dump(i, f, -1)
