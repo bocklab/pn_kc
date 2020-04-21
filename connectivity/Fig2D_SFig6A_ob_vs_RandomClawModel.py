@@ -5,29 +5,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-'''
-%run startup_py3.py
-%run load_pn_metadata_v2.py
-%run medium_term_functions.py
-
-save_path = "/Users/zhengz11/myscripts/data_results/200224-compare_random_claw_PreciseVSRatio/"
-
-fafb_c = cc.fafb_connection(token)
-
-pn_skids = cc.get_skids_from_annos(
-    fafb_c, [['right_calyx_PN'], ['has_bouton']], ["multiglomerular PN"])
-
-rd = cc.get_skids_from_annos(fafb_c,
-                             [['Random Draw 1 KC', 'Random Draw 2 KC'], ['Complete']],
-                             ['KCaBp', 'KCyd'])
-
-t1p = cc.get_skids_from_annos(fafb_c,
-                             [['T1+ Complete']])
-
-'''
-
-ana_all_rd = ar.Analysis.init_connectivity(fafb_c, pn_skids, rd + t1p)
-
+# ana_all_rd = ar.Analysis.init_connectivity(fafb_c, pn_skids, rd + t1p)
+# need ana_all_rd from analysis.py
 
 ##----------------------------------------------------
 ## observed vs. random claw (precise) maintain the precise number of claws per PN

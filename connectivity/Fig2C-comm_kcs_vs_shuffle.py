@@ -1,8 +1,7 @@
 
 #
-# copy from  part of 191117-comm_claws-kcs_vs_shuffle.py
 # Fig 2C (200326, PNKC2019_v9_fig_200313DB-ZZfixedSuppl6B.pptx)
-# save_path = '/Users/zhengz11/myscripts/data_results/191117-community_expansion/'
+
 ana = ana_all_rd
 
 num_exp = 1000
@@ -40,6 +39,7 @@ fig, ax1 = plt.subplots()
 clawhist = ax1.hist(sfl_claw_set)
 ax1.plot(ob_claw, 4, 'ro', ms=12)
 fig.set_size_inches([10,6])
+# save_path = '/Users/zhengz11/myscripts/data_results/191117-community_expansion/'
 # plt.savefig(save_path + '191117-num_claws_for_comm_vs_noncomm_allKCs.png')
 # mean - 1412.5
 # std - 34.0
@@ -64,3 +64,8 @@ ax.plot(ob_kc, 4, 'ro', ms=12)
 fig.set_size_inches([12,6])
 # save_path = '/Users/zhengz11/myscripts/data_results/200226-rerun_comm_claw_hist/'
 # fig.savefig(save_path + '200226-num_kcs_for_comm_vs_noncomm_allKCs_morebins.png', bbox_inches='tight', dpi=600)
+
+
+# below are old comments
+#-------------------------------------------------------
+# copy from  part of 191117-comm_claws-kcs_vs_shuffle.py

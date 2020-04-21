@@ -1,12 +1,7 @@
 
-# copy from 200210-effect_size_vs_BtnClawRandomModel_newFig2E.py
 # Fig3C, 200326 PNKC2019_v9_fig_200313DB-ZZfixedSuppl6B.pptx
-ana = ana_all_rd
-
 from mushroom_2to3 import detect_community as dc
-
-# copy and modify from 190428-random_draw_community_effect_size.py
-# and 191117-comm_claws-kcs_vs_shuffle.py
+ana = ana_all_rd
 
 comm_ids = [22, 44, 32, 42, 34, 38, 30, 23, 47, 4]
 
@@ -143,3 +138,10 @@ t19 = chisquare(ob[:8], btn_s_mean[:8])
 
 t19 = chisquare(ob[:8], claw_s_mean[:8])
 # Power_divergenceResult(statistic=444.9229345486355, pvalue=4.5257981764215116e-91)
+
+# below are old comments
+#--------------------------------------------------
+# copy from 200210-effect_size_vs_BtnClawRandomModel_newFig2E.py
+# Fig3C, 200326 PNKC2019_v9_fig_200313DB-ZZfixedSuppl6B.pptx
+# copy and modify from 190428-random_draw_community_effect_size.py
+# and 191117-comm_claws-kcs_vs_shuffle.py

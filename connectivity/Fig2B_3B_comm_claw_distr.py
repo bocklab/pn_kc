@@ -1,8 +1,5 @@
 
-# copy from 191028-local_randomization_conditional_input_matrix.py
 # 191119 number of community claws with all randomizations, local randomizations, and observed
-# 200211---------------begin (local random bouton set)
-
 
 num_exp = 1000
 ana = ana_all_rd
@@ -109,7 +106,6 @@ ax.legend(['observed','random bouton model','local random claw model'])
 # fig.savefig(save_path + '200226-comm_claws_hist_LocalvsGlobalvsObserved_dpi600.png', bbox_inches='tight', dpi=600)
 
 
-
 # number of community claws in random bouton model vs. observed
 # Fig2B (200326, PNKC2019_v9_fig_200313DB-ZZfixedSuppl6B.pptx)
 fig, ax = plt.subplots()
@@ -119,3 +115,9 @@ ax.plot(ob_claw_set, 4, 'ro', ms=8)
 
 fig.set_size_inches([12,6])
 fig.savefig(save_path + '200226-comm_claws_hist_GlobalvsObserved_dpi600.png', bbox_inches='tight', dpi=600)
+
+# below are old comments
+#-----------------------------------------------------
+# copy from 191028-local_randomization_conditional_input_matrix.py
+# 191119 number of community claws with all randomizations, local randomizations, and observed
+# 200211---------------begin (local random bouton set)

@@ -1,9 +1,5 @@
 
-# local_path = "/Users/zhengz11/myscripts/git_clone/pn_kc/pn_kc/"
-# path = local_path + "test/"
-
 exec(open(local_path + "/connectivity/load_pn_metadata_v2.py").read())
-
 
 pn_skids = load_json(local_path + "data/skids/pn")
 rd = load_json(local_path + "data/skids/RandomDraw")

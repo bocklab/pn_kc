@@ -1,12 +1,8 @@
 
-# 200109 copy from /Users/zhengz11/myscripts/bocklab_git/bocklab/zhihao/mushroom_py/v10/191201-inter_bouton_dist.py
-# rename to 200109-inter_bouton_dist
 # this should generate distance between boutons (Fig 4G, 200326 PNKC2019_v9_fig_200313DB-ZZfixedSuppl6B.pptx)
-# 200326 change to Fig4G_inter_bouton_dist.py
 
 # save_path = '/Users/zhengz11/myscripts/data_results/191201-inter_bouton_dist/'
 import scipy as sc
-
 
 comm_ids = [22, 44, 32, 42, 34, 38, 30, 23, 47, 4]
 comm_anno_ids = df_lookup('glom_id',comm_ids,'glom_anno_id',glom_btn_table)
@@ -129,3 +125,10 @@ fig.set_size_inches([12,6])
 plt.tight_layout()
 plt.show()
 # fig.savefig(save_path + '191202-CommComm_vs_NoncommNoncomm_hist.png', bbox_inches='tight', dpi=600)
+
+#below are old comments
+#-----------------------------------------------------------
+# 200109 copy from /Users/zhengz11/myscripts/bocklab_git/bocklab/zhihao/mushroom_py/v10/191201-inter_bouton_dist.py
+# rename to 200109-inter_bouton_dist
+# this should generate distance between boutons (Fig 4G, 200326 PNKC2019_v9_fig_200313DB-ZZfixedSuppl6B.pptx)
+# 200326 change to Fig4G_inter_bouton_dist.py
