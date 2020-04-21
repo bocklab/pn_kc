@@ -10,10 +10,6 @@ pn_kc_path = "/Users/zhengz11/myscripts/git_clone/pn_kc/"
 # exec(open(pn_kc_path + "/connectivity/analysis.py").read())
 # exec(open(pn_kc_path + "/connectivity/startup.py").read())
 
-# %run startup_py3.py
-# %run load_pn_metadata_v2.py
-# %run medium_term_functions.py
-
 local_path = "/Users/zhengz11/myscripts/git_clone/pn_kc/"
 exec(open(local_path + "connectivity/load_pn_metadata_v2.py").read())
 
