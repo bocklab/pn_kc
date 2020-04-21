@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 %run load_pn_metadata_v2.py
 %run medium_term_functions.py
 
-save_path = "/Users/zhengz11/myscripts/data_results/191112-covariance_matrices/191202_updated/"
+# save_path = "/Users/zhengz11/myscripts/data_results/191112-covariance_matrices/191202_updated/"
 
 fafb_c = cc.fafb_connection(token)
 
@@ -25,8 +25,8 @@ rd = cc.get_skids_from_annos(fafb_c,
 t1p = cc.get_skids_from_annos(fafb_c,
                              [['T1+ Complete']])
 
-ana_rd = ar.Analysis.init_connectivity(fafb_c, pn_skids, rd)
-ana_all_rd = ar.Analysis.init_connectivity(fafb_c, pn_skids, rd + t1p)
+# ana_rd = ar.Analysis.init_connectivity(fafb_c, pn_skids, rd)
+# ana_all_rd = ar.Analysis.init_connectivity(fafb_c, pn_skids, rd + t1p)
 
 from matplotlib import cm
 
