@@ -2,13 +2,8 @@
 import pandas as pd
 import json
 
-# glom_id_table = pd.read_excel("/Users/zhengz11/myscripts/data_results/171012-1D_olfactory_space/171012-glom_index_list.xlsx")
 glom_id_table = pd.read_excel(local_path + "data/171012-glom_index_list.xlsx")
-
-# glom_btn_table = pd.read_excel("/Users/zhengz11/myscripts/data_results/180223-resuscitate_pn-kc_network/180320-glom_name_id.xlsx")
 glom_btn_table = pd.read_excel(local_path + "data/180320-glom_name_id.xlsx")
-
-# pn_meta_table = pd.read_excel('/Users/zhengz11/myscripts/data_results/180223-resuscitate_pn-kc_network/191029-processed_pn_metadata.xlsx')
 pn_meta_table = pd.read_excel(local_path + "data/191029-processed_pn_metadata.xlsx")
 
 original_order = [53,10,43,37,36,35,33,31,52,25,
@@ -19,9 +14,6 @@ original_order = [53,10,43,37,36,35,33,31,52,25,
 14,49,50,51]
 
 NewClusterOrder = [13,32,30,38,23,22,19,47,16,42,34,4,8,11,1,36,7,51,27,25,24,12,6,33,9,48,49,10,40,2,31,50,44,59,43,0,26,29,3,5,14,15,17,35,53,21,52,20,46,41,39,37,18,28]
-
-# old community glomeruli
-# CommunityGlom = [4, 13, 16, 19, 22, 23, 30, 32, 34, 38, 42, 47]
 
 ClusterOrder0707 = [22,44,32,42,34,
 38,30,23,47,4,19,
@@ -36,17 +28,6 @@ ClusterOrder0707 = [22,44,32,42,34,
 18,2,0]
 
 comm_ids = [22, 44, 32, 42, 34, 38, 30, 23, 47, 4]
-
-'''
-FAFB2018_olfactory_PNs
-FAFB2018_KCs
-FAFB2018_non-mALT_PNs
-FAFB2018_Subesophogeal_PN
-FAFB2018_other_PNs
-exclude:
-"multiglomerular PN"
-based on "20170519 PN Comparison With 20180211.xlsx"
-'''
 
 def get_conn_prob_idx(conn_obj, glom_data_table=glom_btn_table):
     '''
@@ -85,3 +66,24 @@ def load_json(path):
     with open(path) as outfile:
         r = json.load(outfile)
     return r
+
+
+# old local tables
+#----------------------------------------------------------------------
+# glom_id_table = pd.read_excel("/Users/zhengz11/myscripts/data_results/171012-1D_olfactory_space/171012-glom_index_list.xlsx")
+# glom_btn_table = pd.read_excel("/Users/zhengz11/myscripts/data_results/180223-resuscitate_pn-kc_network/180320-glom_name_id.xlsx")
+# pn_meta_table = pd.read_excel('/Users/zhengz11/myscripts/data_results/180223-resuscitate_pn-kc_network/191029-processed_pn_metadata.xlsx')
+
+# old community glomeruli
+# CommunityGlom = [4, 13, 16, 19, 22, 23, 30, 32, 34, 38, 42, 47]
+
+'''
+FAFB2018_olfactory_PNs
+FAFB2018_KCs
+FAFB2018_non-mALT_PNs
+FAFB2018_Subesophogeal_PN
+FAFB2018_other_PNs
+exclude:
+"multiglomerular PN"
+based on "20170519 PN Comparison With 20180211.xlsx"
+'''

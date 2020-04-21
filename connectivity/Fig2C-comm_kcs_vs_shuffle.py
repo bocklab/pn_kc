@@ -5,13 +5,9 @@
 ana = ana_all_rd
 
 num_exp = 1000
-
 comm_anno_ids = df_lookup('glom_id',comm_ids,'glom_anno_id',glom_btn_table)
-
 ana_obj = ana.conn_data['glom_kc_in_claw_unit']
-
 all_ids = ana_obj.col_ids
-
 comm_idx = find_elements(all_ids,comm_anno_ids)
 
 reorder_glom = comm_idx + [i for i in range(len(all_ids)) if i not in comm_idx]

@@ -1,14 +1,14 @@
 
 # this should generate distance between boutons (Fig 4G, 200326 PNKC2019_v9_fig_200313DB-ZZfixedSuppl6B.pptx)
 
-# save_path = '/Users/zhengz11/myscripts/data_results/191201-inter_bouton_dist/'
 import scipy as sc
+
+ana = ana_all_rd
 
 comm_ids = [22, 44, 32, 42, 34, 38, 30, 23, 47, 4]
 comm_anno_ids = df_lookup('glom_id',comm_ids,'glom_anno_id',glom_btn_table)
 comm_pns = ana.pn_mapping.types_to_skids(comm_anno_ids)
 
-ana = ana_all_rd
 
 all_pns = ana.col_neurons.values()
 btn_ids = []

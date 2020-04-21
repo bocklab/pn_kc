@@ -4,11 +4,6 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-# %run startup_py3.py
-# %run load_pn_metadata_v2.py
-# %run medium_term_functions.py
-
-
 ##-------------------------------------------------
 ana = ana_all_rd
 

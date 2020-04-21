@@ -1,11 +1,9 @@
 
-# copy from  connectivity/200224-compare_PreciseOrRatioOutdegree_RandomClawModel.py
 # Fig2D, SFig6A (200326, PNKC2019_v9_fig_200313DB-ZZfixedSuppl6B.pptx)
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-# ana_all_rd = ar.Analysis.init_connectivity(fafb_c, pn_skids, rd + t1p)
 # need ana_all_rd from analysis.py
 
 ##----------------------------------------------------
@@ -103,3 +101,7 @@ ax1.set_aspect("equal")
 fig.set_size_inches(16,12)
 plt.show()
 # fig.savefig(save_path + '200228-compare_random_claw_PreciseClawCount_recluster_RandomClawAgainstRandomClaw.png', bbox_inches='tight')
+
+# old comments
+#-----------------------------------------------------------
+# copy from  connectivity/200224-compare_PreciseOrRatioOutdegree_RandomClawModel.py

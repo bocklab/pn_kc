@@ -1,17 +1,11 @@
 
-# copy from /Users/zhengz11/myscripts/bocklab_git/bocklab/zhihao/mushroom_py/v10/191029-bouton-KC-representations_per_PN.py
-# save_path = '/Users/zhengz11/myscripts/data_results/191028-bouton-KC_representations/'
-# 200110 change name to 200110-pn_conn_tbl.py
-# 200326 change name to load_pn_tbl.py
 # This will produce the table for Fig 2A
-
 
 ana = ana_all_rd
 
 # y number of boutons
 # y number of downstream KCs
 # per PN, also per glomerulus
-
 
 path = "/Users/zhengz11/myscripts/git_clone/pn_kc/data/skids/"
 pn_skids = load_json(path + "pn")
@@ -66,3 +60,11 @@ plot_tbl = tbl.copy()
 t1_dict = dict(zip(['Food', 'Aversive', 'Pheromonal', 'Egg-laying', 'Unknown'],['green','red','purple','blue','black']))
 
 plot_tbl['color'] = plot_tbl['significance'].apply(lambda x: t1_dict.get(x))
+
+
+# below are old comments
+#------------------------------------------------------------------------
+# copy from /Users/zhengz11/myscripts/bocklab_git/bocklab/zhihao/mushroom_py/v10/191029-bouton-KC-representations_per_PN.py
+# save_path = '/Users/zhengz11/myscripts/data_results/191028-bouton-KC_representations/'
+# 200110 change name to 200110-pn_conn_tbl.py
+# 200326 change name to load_pn_tbl.py

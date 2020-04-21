@@ -1,18 +1,11 @@
 
-#copy from /Users/zhengz11/myscripts/bocklab_git/bocklab/zhihao/mushroom_py/v10/191202-replot_covariance_matrix.py
-# change date to 200110
 # this will generate suppl fig 4 A - D (4 matrices of covariance analysis)
 
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-
-# save_path = "/Users/zhengz11/myscripts/data_results/191112-covariance_matrices/191202_updated/"
-
-# ana_rd = ar.Analysis.init_connectivity(fafb_c, pn_skids, rd)
-# ana_all_rd = ar.Analysis.init_connectivity(fafb_c, pn_skids, rd + t1p)
-
 from matplotlib import cm
+# need ana_rd and ana_all_rd from analysis.py
 
 ana = ana_all_rd
 conn_data = ana.conn_data['glom_kc_in_claw_unit']
@@ -202,3 +195,10 @@ fig.set_size_inches(18,12)
 plt.show()
 fig.savefig(save_path + "191202-allKC_cov_BinaryPval_OriginalOrder_SynDistr_over-rep_wGlomAnno.png", bbox_inches='tight')
 # fig.savefig(save_path + "191112-allKC_cov_pval_OriginCluster_SynDistr_over-representation.png", bbox_inches='tight')
+
+# below are old comments
+#------------------------------------------------------------------
+#copy from /Users/zhengz11/myscripts/bocklab_git/bocklab/zhihao/mushroom_py/v10/191202-replot_covariance_matrix.py
+# change date to 200110
+
+# save_path = "/Users/zhengz11/myscripts/data_results/191112-covariance_matrices/191202_updated/"

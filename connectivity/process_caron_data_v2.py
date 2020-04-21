@@ -1,17 +1,8 @@
 
 import pandas as pd
 import numpy as np
-import sys
 
-# from mushroom_2to3.shuffle import *
-# from mushroom_2to3.build_connectivity import *
-# from mushroom_2to3.detect_community import *
-
-# likely need to import the mushroom package
-
-# fpath = "/Users/zhengz11/myscripts/data_results/160928-caron_equiv/160928-Caron_suppl_table.xlsx"
 fpath = local_path + "data/160928-Caron_suppl_table.xlsx"
-# abKC_path = "/Users/zhengz11/myscripts/data_results/171012-1D_olfactory_space/171025-Caron_suppl_table_abonly.xlsx"
 
 class CaronAnalysis(object):
     def __init__(self):
@@ -99,3 +90,14 @@ def get_caron_FigS2():
         glom_names = [c_glom.loc[c_glom.glom_number==i,'glom_class'].to_string(header=False, index=False) for i in t3.index.tolist() + zero_idx]
         r[t] = pd.DataFrame({'inputs': t3.tolist() + [0]*len(zero_idx), 'glom': glom_names})
     return r
+
+# old comments
+#---------------------------------------------------------------
+# from mushroom_2to3.shuffle import *
+# from mushroom_2to3.build_connectivity import *
+# from mushroom_2to3.detect_community import *
+# likely need to import the mushroom package
+
+# fpath = "/Users/zhengz11/myscripts/data_results/160928-caron_equiv/160928-Caron_suppl_table.xlsx"
+# fpath = local_path + "data/160928-Caron_suppl_table.xlsx"
+# abKC_path = "/Users/zhengz11/myscripts/data_results/171012-1D_olfactory_space/171025-Caron_suppl_table_abonly.xlsx"

@@ -1,27 +1,14 @@
 # Suppl Fig 2 B,C from PNKC2019_figs_v10_200406DB.pptx
-# This script is copied from PNKC2019_figs_v10_200406DB.pptx
 
-# save_path = "/Users/zhengz11/myscripts/data_results/200331-hemibrain_data/"
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-
-pn_kc_path = "/Users/zhengz11/myscripts/git_clone/pn_kc/"
-# exec(open(pn_kc_path + "/connectivity/analysis.py").read())
-# exec(open(pn_kc_path + "/connectivity/startup.py").read())
-
-local_path = "/Users/zhengz11/myscripts/git_clone/pn_kc/"
-exec(open(local_path + "connectivity/load_pn_metadata_v2.py").read())
+import scipy
 
 data_path = local_path + "data/skids/"
 pn_skids = load_json(data_path + "pn")
 rd = load_json(data_path + "RandomDraw")
 t1p = load_json(data_path + "t1p")
-
-path = '/Users/zhengz11/myscripts/git_clone/pn_kc/data/'
-ana_all_rd = ar.Analysis.init_connectivity(path, pn_skids, rd + t1p, 'pn_all_kc')
-
-exec(open(local_path + "connectivity/load_pn_tbl.py").read())
 
 # this piece is copied from 191022-rerun_figs.py
 ##--------------------------------------------
@@ -87,11 +74,12 @@ ax.set_ylabel('Hemibrain (Xu et al. 2020)')
 ax.set_title("Percentage of connections for each PN type")
 fig.savefig(hemi_path + "200406-compare_fafb_hemibrain_connections_scatterplot_3syn_woCol.png",dpi=600, bbox_inches='tight')
 
-
-import scipy
-
 slope, intercept, r_value, p_value, std_err = scipy.stats.linregress(p_tbl_wcol.glom_perc_conn, p_tbl_wcol.fafb_perc_connections)
 # r-squared value r_value**2 = 0.83
+
+
+# below are old comments or code
+#---------------------------------------------------------------------------
 
 # https://stats.stackexchange.com/questions/146804/difference-between-statsmodel-ols-and-scikit-linear-regression
 
@@ -142,3 +130,7 @@ plt.xlim(-0.2,50)
 fig.set_size_inches(40,10)
 # fig.savefig(hemi_path + "200331-compare_fafb_hemibrain_connections.png",dpi=600, bbox_inches='tight')
 '''
+
+# This script is copied from PNKC2019_figs_v10_200406DB.pptx
+
+# save_path = "/Users/zhengz11/myscripts/data_results/200331-hemibrain_data/"

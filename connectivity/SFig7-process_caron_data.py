@@ -1,12 +1,8 @@
 
+# this generates Suppl Fig7 A-D (re-analysis of Caron et al. result)
+
 import matplotlib.pyplot as plt
-# todo: need to add process_caron_data_v2s
 
-# 200110 copy from /Users/zhengz11/myscripts/bocklab_git/bocklab/zhihao/mushroom_py/v10/191202-process_caron_data.py
-# this generates Suppl Fig4 A-D (re-analysis of Caron et al. result)
-# change date to 200110
-
-# save_path = "/Users/zhengz11/myscripts/data_results/191202-redo_caron_comparison/"
 exec(open(local_path + "/connectivity/process_caron_data_v2.py").read())
 
 num_exp = 1000
@@ -396,3 +392,11 @@ fig.set_size_inches(30,8)
 
 fname = '191204-caron_conn_sampling_tick'
 # fig.savefig(save_path + fname + '.png', bbox_inches='tight')
+
+# old comments are below
+#------------------------------------------------------------------
+# todo: need to add process_caron_data_v2s
+# 200110 copy from /Users/zhengz11/myscripts/bocklab_git/bocklab/zhihao/mushroom_py/v10/191202-process_caron_data.py
+# this generates Suppl Fig4 A-D (re-analysis of Caron et al. result)
+# change date to 200110
+# save_path = "/Users/zhengz11/myscripts/data_results/191202-redo_caron_comparison/"

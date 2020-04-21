@@ -124,11 +124,8 @@ plt.xticks(ind + width*2, [int(i) for i in ind])
 from scipy.stats import chisquare
 t21 = chisquare(ob[:9], local_s_mean[:9])
 
-
-
 # Chi-squared statistical test
 # 200212
-from scipy.stats import chisquare
 t21 = chisquare(ob, local_s_mean)
 t21
 # Power_divergenceResult(statistic=23.845043068217716, pvalue=0.004553135508363728)
