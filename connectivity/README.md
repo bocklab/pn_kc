@@ -5,6 +5,6 @@ requires popular python libraries like numpy, pandas, matplotlib, scipy, etc.
 
 - Reconstructed neurons in the form of skeletons are in *data/compact_sk/* ([field description](https://catmaid.readthedocs.io/en/stable/_static/api/index.html#operation/skeletons_compact-detail_list))
 
-- Connectivity matrix can be set up by running *analysis.py*. Alternatively, it can be extracted from *data/pre_post_info/* [field description][https://github.com/bocklab/pn_kc/blob/master/mushroom_2to3/connect_path.py#L265].
+- Connectivity matrix can be set up by running *analysis.py*. Alternatively, it can be extracted from *data/pre_post_info/* ([field description](https://github.com/bocklab/pn_kc/blob/master/mushroom_2to3/connect_path.py#L265)).
 
 -  Skeleton ids for different groups of neurons are in *data/skids*
