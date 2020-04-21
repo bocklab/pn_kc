@@ -1,9 +1,11 @@
 import sys
 import os
-sys.path.append('/Users/zhengz11/myscripts/git_clone/pn_kc/')
+
+local_path = "/Users/zhengz11/myscripts/git_clone/pn_kc/pn_kc/"
+sys.path.append(local_path)
 
 # local path to the code
-local_path = "/Users/zhengz11/myscripts/git_clone/pn_kc/"
+
 # data_path = local_path + "test/skids/"
 
 # exec(open(local_path + "/connectivity/startup.py").read())
