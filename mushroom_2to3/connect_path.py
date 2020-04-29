@@ -56,8 +56,8 @@ def get_compact_sk(connection, skid, save_pickle=False):
     # 6: radius
     # 7: confidence
     if isinstance(connection, str):
-        connection = connection + "compact_sk/"
-        with open(connection + "%s" % skid) as outfile:
+        connection = os.path.join(connection, "compact_sk")
+        with open(os.path.join(connection, "%s") % skid) as outfile:
             sk = json.load(outfile)
         return sk
     else:
@@ -91,15 +91,15 @@ def save_compact_sk(connection, skid, path):
     connection.addpath('/%s/%s/1/1/compact-skeleton' % (connection.projectID,
                                                         skid))
     r = connection.get()
-    path = path + "compact_sk/"
+    path = os.path.join(path, "compact_sk")
     if not os.path.exists(path):
         os.makedirs(path)
-    with open(path + "%s" % skid, 'w+') as outfile:
+    with open(os.path.join(path, "%s" % skid), 'w+') as outfile:
         json.dump(json.loads(r.text), outfile)
 
 def load_compact_sk(skid, path):
-    path = path + "compact_sk/"
-    with open(path + "%s.json" % skid) as outfile:
+    path = os.path.join(path, "compact_sk")
+    with open(os.path.join(path, "%s.json" % skid)) as outfile:
         r = json.load(outfile)
     return r
 
@@ -108,7 +108,7 @@ def load_compact_sk(skid, path):
 #------------------------------------------------------------------------------
 def skid_to_name(connection, skids):
     if isinstance(connection, str):
-        connection = connection + "neurons_names"
+        connection = os.path.join(connection, "neurons_names")
         with open(connection) as outfile:
                 r = json.load(outfile)
         t = [str(j) for j in skids]
@@ -132,7 +132,7 @@ def get_neurons_names(connection, sk_ids):
     return [get_neuron_name(connection, i) for i in sk_ids]
 
 def save_neurons_names(connection, sk_ids, path):
-    path = path + "neurons_names"
+    path = os.path.join(path, "neurons_names")
     r = dict(zip(sk_ids, [get_neuron_name(connection, i) for i in sk_ids]))
     with open(path, 'w+') as outfile:
             json.dump(r, outfile)
@@ -144,7 +144,7 @@ def get_root_node(connection, skid):
     if isinstance(connection, str):
         # right now it will load the root node file every time...
         # not ideal but...
-        connection = connection + "root_node"
+        connection = os.path.join(connection, "root_node")
         with open(connection) as outfile:
             r = json.load(outfile)
         return r[str(skid)]
@@ -155,7 +155,7 @@ def get_root_node(connection, skid):
         return data
 
 def save_root_node(connection, skids, path):
-    path = path + "root_node"
+    path = os.path.join(path, "root_node")
     f = {}
     for skid in skids:
         connection.addpath('/%s/skeletons/%s/root' % (connection.projectID, skid))
@@ -173,7 +173,7 @@ def retrieve_annotated_annotations(connection, meta_anno, returns='name'):
     if isinstance(connection, str):
         # if connection is a pre-saved path,
         # returns can only be 'id'
-        connection = connection + meta_anno
+        connection = os.path.join(connection, meta_anno)
         with open(connection) as outfile:
             r = json.load(outfile)
         return r
@@ -207,7 +207,7 @@ def save_annotated_annotations(connection, meta_anno, returns, path):
     r = connection.post(opts)
     data = json.loads(r.text)
     results = [i[returns] for i in data['entities']]
-    with open(path + meta_anno, 'w+') as outfile:
+    with open(os.path.join(path, meta_anno), 'w+') as outfile:
         json.dump(results, outfile)
     print(meta_anno + "saved")
 
@@ -221,7 +221,7 @@ def save_annotated_annotations(connection, meta_anno, returns, path):
 #------------------------------------------------------------------------------
 def retrieve_annotations_for_skeleton(connection, skid):
     if isinstance(connection, str):
-        with open(connection + "annotations_for_skeleton/%s" % skid) as file:
+        with open(os.path.join(connection, "annotations_for_skeleton/%s" % skid)) as file:
             r = json.load(file)
         return r
     else:
@@ -232,7 +232,7 @@ def retrieve_annotations_for_skeleton(connection, skid):
         return results['annotations']
 
 def save_annotations_for_skeleton(connection, skids, path):
-    path = path + "annotations_for_skeleton/"
+    path = os.path.join(path, "annotations_for_skeleton/")
     if not os.path.exists(path):
         os.makedirs(path)
     for skid in skids:
@@ -240,7 +240,7 @@ def save_annotations_for_skeleton(connection, skids, path):
         opts = {'skeleton_ids[0]': skid}
         r = connection.post(opts)
         results = json.loads(r.text)
-        with open(path + "%s" % skid, "w+") as file:
+        with open(os.path.join(path, "%s" % skid), "w+") as file:
             json.dump(results['annotations'], file)
             print("%s saved" % skid)
 
@@ -249,7 +249,7 @@ def save_annotations_for_skeleton(connection, skids, path):
 #---------------------------------------------------------------------------
 def get_pre_post_info(connection, pre_skids, post_skids, info_file="_"):
     if isinstance(connection, str):
-        with open(connection + "pre_post_info/" + info_file) as file:
+        with open(os.path.join(connection, "pre_post_info", info_file)) as file:
             r = json.load(file)
         return r
     else:
@@ -288,7 +288,7 @@ def save_pre_post_info(connection, pre_skids, post_skids, path, info_file):
         os.makedirs(path)
     r = connection.post(opts)
     data = json.loads(r.text)
-    with open(path + info_file, "w+") as file:
+    with open(os.path.join(path, info_file), "w+") as file:
         json.dump(data, file)
     print(info_file + " saved")
 
