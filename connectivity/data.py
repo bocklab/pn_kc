@@ -34,7 +34,19 @@ rd = load_json(os.path.join(data_dir,  "skids/RandomDraw"))
 t1p = load_json(os.path.join(data_dir, "skids/t1p"))
 bundle = load_json(os.path.join(data_dir, "skids/bundle"))
 
-ana_all_rd = ar.Analysis.init_connectivity(data_dir, pn_skids, rd + t1p, 'pn_all_kc')
-ana_rd = ar.Analysis.init_connectivity(data_dir, pn_skids, rd, 'pn_rd_kc')
+try:
+    with open(os.path.join(data_dir, "node_to_segment_cache.pkl"), "rb") as f:
+        node_to_segment_cache = pickle.load(f)
+except:
+    print("Warning: Could not read existing node_to_segment_cache.")
+    node_to_segment_cache = {}
+
+ana_all_rd = ar.Analysis.init_connectivity(data_dir, pn_skids, rd + t1p, 'pn_all_kc', node_to_segment_cache)
+ana_rd = ar.Analysis.init_connectivity(data_dir, pn_skids, rd, 'pn_rd_kc', node_to_segment_cache)
+
+# Uncomment to save the cache
+with open(os.path.join(data_dir, "node_to_segment_cache.pkl"), "wb") as f:
+    pickle.dump(node_to_segment_cache, f)
+
 
 # exec(open(local_path + "/connectivity/load_pn_tbl.py").read())

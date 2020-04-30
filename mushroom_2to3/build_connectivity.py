@@ -5,6 +5,7 @@ import os
 import datetime
 import numpy as np
 import pandas as pd
+import pickle
 from sklearn.neighbors import NearestNeighbors
 from scipy.spatial import ConvexHull
 from sqlalchemy import create_engine
@@ -418,7 +419,7 @@ def neurons_to_segment_ids(skids, neuron_dict):
     sids = [_f for _f in sids if _f]
     return sids
 
-def get_connectivity_data(connection, col_neurons, row_neurons, c_skids, r_skids, btn_ids, claw_ids, info_file):
+def get_connectivity_data(connection, col_neurons, row_neurons, c_skids, r_skids, btn_ids, claw_ids, info_file, cache={}):
     conn_data = {}
     r = cc.get_pre_post_info(connection, c_skids, r_skids, info_file)
     # 0 "connector_id",
@@ -436,10 +437,21 @@ def get_connectivity_data(connection, col_neurons, row_neurons, c_skids, r_skids
 
     # bouton -> claw connectivity
     conn=np.zeros((len(claw_ids),len(btn_ids)))
+
+    # Cache the calls to node_to_segment to speed this up a bit
+
     for i in r:
-        sub_b = col_neurons[i[3]].node_to_segment(i[2])
+        if (i[3],i[2]) in cache:
+            sub_b =  cache[(i[3],i[2])]
+        else:
+            sub_b = col_neurons[i[3]].node_to_segment(i[2])
+            cache[(i[3],i[2])] = sub_b
         if sub_b:
-            sub_c = row_neurons[i[8]].node_to_segment(i[7])
+            if (i[8],i[7]) in cache:
+                sub_c =  cache[(i[8],i[7])]
+            else:
+                sub_c = row_neurons[i[8]].node_to_segment(i[7])
+                cache[(i[8],i[7])] = sub_c
             if sub_c:
                 conn[claw_ids.index(sub_c), btn_ids.index(sub_b)] += 1
     conn_data['bouton_claw'] = ConnectivityMatrix('bouton_claw', conn, btn_ids, claw_ids)
@@ -447,7 +459,11 @@ def get_connectivity_data(connection, col_neurons, row_neurons, c_skids, r_skids
     # bouton -> KC connectivity
     bk_conn=np.zeros((len(r_skids),len(btn_ids)))
     for i in r:
-        subs = col_neurons[i[3]].node_to_segment(i[2])
+        if (i[3],i[2]) in cache:
+            subs = cache[(i[3],i[2])]
+        else:
+            subs = col_neurons[i[3]].node_to_segment(i[2])
+            cache[(i[3],i[2])] = subs
         if subs in btn_ids:
             bk_conn[r_skids.index(i[8]), btn_ids.index(subs)] += 1
     conn_data['bouton_kc'] = ConnectivityMatrix('bouton_kc', bk_conn, btn_ids, r_skids)
@@ -457,6 +473,7 @@ def get_connectivity_data(connection, col_neurons, row_neurons, c_skids, r_skids
     for i in r:
         pn_kc_conn[r_skids.index(i[8]), c_skids.index(i[3])] += 1
     conn_data['pn_kc'] = ConnectivityMatrix('pn_kc', pn_kc_conn, c_skids, r_skids)
+
     return conn_data
 """
     # 020323 suppress here as KC -> PN connectivity is not relevant to the paper
