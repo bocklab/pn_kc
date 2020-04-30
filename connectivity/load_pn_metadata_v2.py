@@ -1,10 +1,13 @@
-
+import os
 import pandas as pd
 import json
 
-glom_id_table = pd.read_excel(local_path + "data/171012-glom_index_list.xlsx")
-glom_btn_table = pd.read_excel(local_path + "data/180320-glom_name_id.xlsx")
-pn_meta_table = pd.read_excel(local_path + "data/191029-processed_pn_metadata.xlsx")
+pnkc_root = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+data_dir = os.path.join(pnkc_root, "data")
+
+glom_id_table = pd.read_excel(os.path.join(data_dir, "171012-glom_index_list.xlsx"))
+glom_btn_table = pd.read_excel(os.path.join(data_dir, "180320-glom_name_id.xlsx"))
+pn_meta_table = pd.read_excel(os.path.join(data_dir,  "191029-processed_pn_metadata.xlsx"))
 
 original_order = [53,10,43,37,36,35,33,31,52,25,
 20,15,26,3,6,9,30,22,23,34,
