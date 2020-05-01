@@ -1,6 +1,5 @@
 #
-# This is a combination of several of files to have this code work on
-# a generic python instance (e.g. binder.)
+# This is a modification of the previous startup.py to work as an import.
 #
 
 import json
@@ -26,9 +25,6 @@ def load_json(path):
         r = json.load(outfile)
     return r
 
-
-# exec(open(local_path + "/connectivity/load_pn_metadata_v2.py").read())
-
 pn_skids = load_json(os.path.join(data_dir,  "skids/pn"))
 rd = load_json(os.path.join(data_dir,  "skids/RandomDraw"))
 t1p = load_json(os.path.join(data_dir, "skids/t1p"))
@@ -41,12 +37,26 @@ except:
     print("Warning: Could not read existing node_to_segment_cache.")
     node_to_segment_cache = {}
 
-ana_all_rd = ar.Analysis.init_connectivity(data_dir, pn_skids, rd + t1p, 'pn_all_kc', node_to_segment_cache)
-ana_rd = ar.Analysis.init_connectivity(data_dir, pn_skids, rd, 'pn_rd_kc', node_to_segment_cache)
+ana_all_rd = None
+ana_rd = None
 
-# Uncomment to save the cache
-with open(os.path.join(data_dir, "node_to_segment_cache.pkl"), "wb") as f:
-    pickle.dump(node_to_segment_cache, f)
+def get_ana_rd():
+    global ana_rd
+    if ana_rd is None:
+        ana_rd = ar.Analysis.init_connectivity(data_dir, pn_skids, rd, 'pn_rd_kc', node_to_segment_cache)
+    return ana_rd
+
+def get_ana_all_rd():
+    global ana_all_rd
+    if ana_all_rd is None:        
+        ana_all_rd = ar.Analysis.init_connectivity(data_dir, pn_skids, rd + t1p, 'pn_all_kc', node_to_segment_cache)
+    return ana_all_rd
+
+
+def save_cache(filename="node_to_segment_cache.pkl"):
+    if len(node_to_segment_cache) > 0:
+        with open(os.path.join(data_dir, "node_to_segment_cache.pkl"), "wb") as f:
+            pickle.dump(node_to_segment_cache, f)
 
 
 # exec(open(local_path + "/connectivity/load_pn_tbl.py").read())

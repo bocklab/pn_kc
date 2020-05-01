@@ -1,9 +1,15 @@
 import os
 import pandas as pd
 import json
+import sys
 
 pnkc_root = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 data_dir = os.path.join(pnkc_root, "data")
+
+# Add the local_path to make mushroom_2to3 visible
+sys.path.insert(1, os.path.join(sys.path[0], pnkc_root))
+
+from mushroom_2to3.detect_community import df_lookup, get_raw_inputs
 
 glom_id_table = pd.read_excel(os.path.join(data_dir, "171012-glom_index_list.xlsx"))
 glom_btn_table = pd.read_excel(os.path.join(data_dir, "180320-glom_name_id.xlsx"))
