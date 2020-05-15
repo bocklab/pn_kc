@@ -80,9 +80,17 @@ class Analysis(object):
 
         gc_name = 'glom_claw_in_claw_unit'
         gk_name = 'glom_kc_in_claw_unit'
+        pc_name = 'pn_claw_in_claw_unit'
+        pk_name = 'pn_kc_in_claw_unit'
         self.conn_data[gc_name] = ConnectivityMatrix(gc_name, conn, gc.col_ids, gc.row_ids)
         self.conn_data[gk_name] = self.conn_data[gc_name].combine(self.kc_mapping.segment_skid, gk_name, axis=0)
-        self.conn_data[gk_name]._get_ci_similarity()
+
+        pc = self.conn_data['pn_claw_contracted']
+        p_conn = pc.conn['5s'].copy()
+        p_conn[p_conn>0]=1
+        self.conn_data[pc_name] = ConnectivityMatrix(pc_name, p_conn, pc.col_ids, pc.row_ids)
+        self.conn_data[pk_name] = self.conn_data[pc_name].combine(self.kc_mapping.segment_skid, pk_name, axis=0)
+#        self.conn_data[gk_name]._get_ci_similarity()
 
 
     def skid_to_name(self, skids):

@@ -73,3 +73,8 @@ import mushroom_2to3.connect_path as cp
 import mushroom_2to3.analysis_routine as ar
 path = "/Users/zhengz11/myscripts/git_clone/pn_kc/test/"
 t1 = cp.get_root_node(path, t_pn_skids[0])
+
+
+# save binary connectivity matrix between PNs and KCs
+pk_conn = ana.conn_data['pn_kc_in_claw_unit'].conn['1s'].copy()
+# np.save(local_path + "data/200514_pn_kc_bi_conn.npy", pk_conn)
