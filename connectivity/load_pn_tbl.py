@@ -7,8 +7,7 @@ ana = ana_all_rd
 # y number of downstream KCs
 # per PN, also per glomerulus
 
-path = "/Users/zhengz11/myscripts/git_clone/pn_kc/data/skids/"
-pn_skids = load_json(path + "pn")
+pn_skids = load_json(local_path + "data/skids/pn")
 # pn_skids = cc.get_skids_from_annos(fafb_c, [['right_calyx_PN'], ['has_bouton']], ["multiglomerular PN"])
 
 boutons_per_pn = [len(ana.col_neurons[i].segments.ids) for i in pn_skids]
