@@ -7,7 +7,7 @@ from scipy.spatial import distance
 
 from igraph import *
 
-from . import connect_path as cc
+from . import connect as cc
 
 
 url = cc.fafbServer[1] + '/?pid=1&xp=%s&yp=%s&zp=%s&tool=tracingtool&sid0=5&s0=1'

@@ -9,7 +9,7 @@ from sklearn.neighbors import NearestNeighbors
 from scipy.spatial import ConvexHull
 from sqlalchemy import create_engine
 
-from . import connect_path as cc
+from . import connect
 from . import neurogenesis
 
 
@@ -297,12 +297,12 @@ class Mapping(object):
 
     def _mapping_skids_to_types(self, connection, type_meta_anno, skids):
         if type_meta_anno and skids is not None:
-            type_ids = cc.retrieve_annotated_annotations(connection, type_meta_anno, 'id')
+            type_ids = connect.retrieve_annotated_annotations(connection, type_meta_anno, 'id')
             self.long_skids = []
             skid_list = []
             type_list = []
             for i in skids:
-                annos = cc.retrieve_annotations_for_skeleton(connection, i)
+                annos = connect.retrieve_annotations_for_skeleton(connection, i)
                 anno_ids = [int(j) for j in list(annos.keys())]
                 sk_anno_ids = [j for j in anno_ids if j in type_ids]
                 self.long_skids.append('.'.join([str(i)] + [str(k) for k in sk_anno_ids]))
@@ -418,9 +418,9 @@ def neurons_to_segment_ids(skids, neuron_dict):
     sids = [_f for _f in sids if _f]
     return sids
 
-def get_connectivity_data(connection, col_neurons, row_neurons, c_skids, r_skids, btn_ids, claw_ids, info_file):
+def get_connectivity_data(connection, col_neurons, row_neurons, c_skids, r_skids, btn_ids, claw_ids):
     conn_data = {}
-    r = cc.get_pre_post_info(connection, c_skids, r_skids, info_file)
+    r = connect.get_pre_post_info(connection, c_skids, r_skids)
     # 0 "connector_id",
     # 1 "connector_xyz",
     # 2 "pre_node",
@@ -457,12 +457,9 @@ def get_connectivity_data(connection, col_neurons, row_neurons, c_skids, r_skids
     for i in r:
         pn_kc_conn[r_skids.index(i[8]), c_skids.index(i[3])] += 1
     conn_data['pn_kc'] = ConnectivityMatrix('pn_kc', pn_kc_conn, c_skids, r_skids)
-    return conn_data
-"""
-    # 020323 suppress here as KC -> PN connectivity is not relevant to the paper
 
     # KC -> PN connectivity
-    r = cc.get_pre_post_info(connection, r_skids, c_skids)
+    r = connect.get_pre_post_info(connection, r_skids, c_skids)
     kc_pn = np.zeros((len(r_skids),len(c_skids)))
     for i in r:
         kc_pn[r_skids.index(i[3]), c_skids.index(i[8])] += 1
@@ -475,8 +472,7 @@ def get_connectivity_data(connection, col_neurons, row_neurons, c_skids, r_skids
         if subs in btn_ids:
             kc_btn[r_skids.index(i[3]), btn_ids.index(subs)] += 1
     conn_data['kc_bouton'] = ConnectivityMatrix('kc_bouton', kc_btn, btn_ids, r_skids)
-"""
-
+    return conn_data
 
 
 def get_ci_matrix(conn, ci_source=False):

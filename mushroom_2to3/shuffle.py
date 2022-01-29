@@ -2,7 +2,7 @@ import time
 import pandas as pd
 import numpy as np
 # import seaborn as sns
-from . import connect_path as cc
+from . import connect as cc
 from .build_connectivity import *
 
 from igraph import *

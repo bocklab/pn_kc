@@ -23,8 +23,7 @@ class Analysis(object):
         self.geo_data = {}
 
     @classmethod
-    def init_connectivity(cls, connection, c_skids, r_skids, kc_group):
-        # if connection is a path, kc_group can only be "RandomDraw", "t1p", or "all"
+    def init_connectivity(cls, connection, c_skids, r_skids):
         c=cls()
 
         c.col_neurons = neurogenesis.init_from_skid_list(connection, c_skids)
@@ -34,7 +33,7 @@ class Analysis(object):
         claw_ids = neurons_to_segment_ids(r_skids, c.row_neurons)
 
         c.conn_data = get_connectivity_data(connection, c.col_neurons, c.row_neurons,
-                                            c_skids, r_skids, btn_ids, claw_ids, kc_group)
+                                            c_skids, r_skids, btn_ids, claw_ids)
 
         c.geo_data['centroids'] = GeoMatrix('segment_centroids', centroid_matrix_constructor,
                                             btn_ids, claw_ids, c.col_neurons, c.row_neurons, 'segments')
@@ -80,17 +79,20 @@ class Analysis(object):
 
         gc_name = 'glom_claw_in_claw_unit'
         gk_name = 'glom_kc_in_claw_unit'
-        pc_name = 'pn_claw_in_claw_unit'
-        pk_name = 'pn_kc_in_claw_unit'
         self.conn_data[gc_name] = ConnectivityMatrix(gc_name, conn, gc.col_ids, gc.row_ids)
         self.conn_data[gk_name] = self.conn_data[gc_name].combine(self.kc_mapping.segment_skid, gk_name, axis=0)
+        self.conn_data[gk_name]._get_ci_similarity()
 
+        # 201229 add pn_kc in claw unit
         pc = self.conn_data['pn_claw_contracted']
-        p_conn = pc.conn['5s'].copy()
-        p_conn[p_conn>0]=1
-        self.conn_data[pc_name] = ConnectivityMatrix(pc_name, p_conn, pc.col_ids, pc.row_ids)
+        pc_conn = pc.conn['5s'].copy()
+        pc_conn[pc_conn>0]=1
+
+        pc_name = 'pn_claw_in_claw_unit'
+        pk_name = 'pn_kc_in_claw_unit'
+        self.conn_data[pc_name] = ConnectivityMatrix(pc_name, pc_conn, pc.col_ids, pc.row_ids)
         self.conn_data[pk_name] = self.conn_data[pc_name].combine(self.kc_mapping.segment_skid, pk_name, axis=0)
-#        self.conn_data[gk_name]._get_ci_similarity()
+        self.conn_data[pk_name]._get_ci_similarity()
 
 
     def skid_to_name(self, skids):
