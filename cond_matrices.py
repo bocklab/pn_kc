@@ -1,6 +1,7 @@
 
 ##----------------------------
 # Fig3B
+# Ob vs. Random bouton
 ana = ana_all_rd
 
 conn_data = ana.conn_data['glom_kc_in_claw_unit']
