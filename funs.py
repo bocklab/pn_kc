@@ -1,6 +1,7 @@
 
 import pandas as pd
 
+#!! set wd to dir of the code, and data_path to dir of the data from figshare
 wd = "~/myscripts/git_clone/pn_kc/pn_kc/"
 data_path = ""
 

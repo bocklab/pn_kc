@@ -117,7 +117,7 @@ plt.show()
 
 
 ##----------------------------
-# Fig5F
+# Fig5F observed vs. local random model
 n = 5
 num_exp = 10000
 ana = ana_all_rd

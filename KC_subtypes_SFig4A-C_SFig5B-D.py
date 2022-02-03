@@ -12,7 +12,7 @@ for random_claws in [False, True]:
         if random_claws:
             stat = [get_raw_inputs(i) for i in shuffle_glom_kc_iterate(ob_conn, num_exp)]
         else:
-            # random claw null model
+            # random bouton null model
             stat = [get_raw_inputs(shuffle_glom_kc_w_prob(ob_conn, glom_prob)) for i in range(num_exp)]
 
         stat = np.array(stat)
